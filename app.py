@@ -1,136 +1,190 @@
 import streamlit as st
-from groq import Groq
+import json
+import numpy as np
+import random
+import nltk
+from nltk.stem import LancasterStemmer
+from sklearn.neural_network import MLPClassifier
 
-# 1. KONFIGURASI API GROQ
-# Masukkan API Key kamu di sini
-GROQ_API_KEY = "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"
-client = Groq(api_key=GROQ_API_KEY)
+# ===============================
+# CONFIG HALAMAN
+# ===============================
+st.set_page_config(
+    page_title="Sahabat Donor AI",
+    page_icon="🩸",
+    layout="centered"
+)
 
-# 2. UI CUSTOM CSS (STRICT THEME & CHAT BUBBLES)
-st.set_page_config(page_title="Sahabat Donor AI", page_icon="🩸", layout="centered")
+# ===============================
+# LOAD & TRAIN MODEL
+# ===============================
+@st.cache_resource
+def init_model():
+    nltk.download("punkt")
+    stemmer = LancasterStemmer()
 
-st.markdown("""
-    <style>
-    /* Background Dasar */
-    .stApp { background-color: #f7f9fb; }
-    
-    /* Header Box Merah */
-    .main-header {
-        background: linear-gradient(135deg, #e53935 0%, #b71c1c 100%);
-        padding: 30px;
-        border-radius: 20px;
-        color: white;
-        text-align: center;
-        margin-bottom: 30px;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    }
-    .main-header h1 { color: white !important; font-size: 32px !important; margin-bottom: 5px; }
-    .main-header p { font-size: 16px; opacity: 0.9; }
+    with open("intents.json", encoding="utf-8") as f:
+        data = json.load(f)
 
-    /* Container Chat */
-    .chat-container { width: 100%; display: flex; flex-direction: column; gap: 15px; }
+    words, labels, docs_x, docs_y = [], [], [], []
 
-    /* Bubble Chat USER (RATA KANAN) */
-    .user-wrapper {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        width: 100%;
-        margin-bottom: 10px;
-    }
-    .user-bubble {
-        background-color: #d32f2f;
-        color: white;
-        padding: 12px 18px;
-        border-radius: 20px 20px 0px 20px;
-        width: fit-content;
-        max-width: 80%;
-        box-shadow: 0 4px 10px rgba(211, 47, 47, 0.2);
-    }
+    for intent in data["intents"]:
+        for pattern in intent["patterns"]:
+            tokens = nltk.word_tokenize(pattern)
+            words.extend(tokens)
+            docs_x.append(tokens)
+            docs_y.append(intent["tag"])
+        if intent["tag"] not in labels:
+            labels.append(intent["tag"])
 
-    /* Bubble Chat BOT (RATA KIRI) */
-    .bot-wrapper {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        width: 100%;
-        margin-bottom: 10px;
-    }
-    .bot-bubble {
-        background-color: white;
-        color: #333;
-        padding: 12px 18px;
-        border-radius: 20px 20px 20px 0px;
-        width: fit-content;
-        max-width: 80%;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        border: 1px solid #eee;
-    }
+    words = sorted(set(stemmer.stem(w.lower()) for w in words if w != "?"))
+    labels = sorted(labels)
 
-    /* Label Nama & Ikon */
-    .label { font-size: 12px; font-weight: bold; margin-bottom: 4px; }
-    .label-user { color: #d32f2f; text-align: right; }
-    .label-bot { color: #555; text-align: left; }
-    </style>
-    
-    <div class="main-header">
-        <h1>🩸 SAHABAT DONOR AI</h1>
-        <p>Asisten Khusus Informasi Donor Darah</p>
-    </div>
-    """, unsafe_allow_html=True)
+    training, output = [], []
+    for i, doc in enumerate(docs_x):
+        bag = []
+        stemmed = [stemmer.stem(w.lower()) for w in doc]
+        for w in words:
+            bag.append(1 if w in stemmed else 0)
+        training.append(bag)
+        output.append(labels.index(docs_y[i]))
 
-# 3. INSTRUKSI SISTEM (DIPERKETAT AGAR TIDAK JAWAB LUAR TOPIK)
-# Ini adalah kunci agar AI menolak pertanyaan Xiaomi/Jam/Lainnya
-system_prompt = {
-    "role": "system",
-    "content": """
-    STRICT RULES / ATURAN KETAT:
-    1. Nama kamu adalah 'Sahabat Donor'. Kamu adalah asisten KHUSUS donor darah.
-    2. Kamu HANYA boleh menjawab pertanyaan seputar donor darah (syarat, manfaat, prosedur, dll).
-    3. Jika user bertanya hal di luar donor darah (seperti: gadget, HP Xiaomi, waktu/jam, cuaca, masak, dll), kamu DILARANG memberikan informasi tersebut.
-    4. Respon wajib jika di luar topik: "Maaf Kak, sebagai Sahabat Donor, saya hanya bisa membantu menjawab pertanyaan seputar donor darah. Silakan tanya hal terkait donor darah ya! 😊"
-    5. Gunakan bahasa Indonesia yang ramah dan sopan.
-    """
-}
+    model = MLPClassifier(
+        hidden_layer_sizes=(16, 16),
+        max_iter=1000,
+        random_state=42
+    )
+    model.fit(np.array(training), np.array(output))
 
-# 4. SIDEBAR INFORMASI
+    return words, labels, model, data, stemmer
+
+words, labels, model, data, stemmer = init_model()
+
+# ===============================
+# FUNGSI RESPON BOT (FIX JADWAL)
+# ===============================
+def get_response(text):
+    text_lower = text.lower()
+
+    # HARD RULE biar "jadwal" PASTI kebaca
+    if "jadwal" in text_lower or "hari ini" in text_lower:
+        return (
+            "Jadwal donor darah biasanya tersedia setiap hari kerja di kantor PMI. "
+            "Untuk jadwal donor darah hari ini, silakan cek media sosial PMI setempat "
+            "atau datang langsung ke Unit Donor Darah (UDD) terdekat."
+        )
+
+    bag = [0] * len(words)
+    tokens = nltk.word_tokenize(text)
+    tokens = [stemmer.stem(w.lower()) for w in tokens]
+
+    for token in tokens:
+        for i, w in enumerate(words):
+            if w == token:
+                bag[i] = 1
+
+    probs = model.predict_proba([bag])[0]
+    idx = np.argmax(probs)
+
+    # THRESHOLD DITURUNKAN (PENTING)
+    if probs[idx] > 0.35:
+        tag = labels[idx]
+        for intent in data["intents"]:
+            if intent["tag"] == tag:
+                return random.choice(intent["responses"])
+
+    return "Maaf, saya hanya bisa membantu seputar donor darah 🩸"
+
+# ===============================
+# SIDEBAR
+# ===============================
 with st.sidebar:
-    st.markdown("### 🏥 **Informasi Sistem**")
-    st.info("Chatbot ini menggunakan model **Llama-3 (70B)** yang sudah dikunci untuk topik Donor Darah.")
-    if st.button("Hapus Riwayat Chat"):
-        st.session_state.messages = [system_prompt]
+    st.markdown("### 👩‍💻 Developer")
+    st.success(
+        "**Kayla Az Zahra**\n\n"
+        "Project UAS Machine Learning"
+    )
+
+    st.markdown("### ℹ️ Info Sistem")
+    st.info(
+        "Chatbot ini menggunakan algoritma Neural Network "
+        "(Multi-layer Perceptron) dengan pendekatan Supervised Learning."
+    )
+
+    if st.button("🗑️ Reset Chat"):
+        st.session_state.messages = []
         st.rerun()
-    st.divider()
-    st.write("📌 **Developer:** Kayla Az Zahra")
-    st.write("🎓 **Project:** UAS Machine Learning")
 
-# Logika Chat Session
+# ===============================
+# HEADER
+# ===============================
+st.markdown(
+    "<h1 style='text-align:center;color:#e63946;'>🩸 Sahabat Donor AI</h1>",
+    unsafe_allow_html=True
+)
+st.markdown(
+    "<p style='text-align:center;'>Asisten Cerdas Informasi Donor Darah</p>",
+    unsafe_allow_html=True
+)
+st.caption(
+    "<p style='text-align:center;'>Engine: Supervised Learning (MLP)</p>",
+    unsafe_allow_html=True
+)
+st.divider()
+
+# ===============================
+# SESSION STATE
+# ===============================
 if "messages" not in st.session_state:
-    st.session_state.messages = [system_prompt]
+    st.session_state.messages = [
+        {
+            "role": "assistant",
+            "content": "Halo! Saya Sahabat Donor. Ada yang bisa saya bantu?"
+        }
+    ]
 
-# Tampilkan Riwayat Chat
-for message in st.session_state.messages:
-    if message["role"] == "user":
-        st.markdown(f'''<div class="user-wrapper"><span class="label label-user">Kamu 👤</span><div class="user-bubble">{message["content"]}</div></div>''', unsafe_allow_html=True)
-    elif message["role"] == "assistant":
-        st.markdown(f'''<div class="bot-wrapper"><span class="label label-bot">🤖 Sahabat Donor</span><div class="bot-bubble">{message["content"]}</div></div>''', unsafe_allow_html=True)
+# ===============================
+# CHAT UI MANUAL (KANAN–KIRI)
+# ===============================
+for msg in st.session_state.messages:
+    if msg["role"] == "user":
+        st.markdown(f"""
+        <div style="display:flex;justify-content:flex-end;margin:10px 0;">
+            <div style="
+                background:#ffe3e3;
+                padding:10px 14px;
+                border-radius:18px 18px 4px 18px;
+                max-width:70%;
+            ">
+                {msg["content"]}
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+    else:
+        st.markdown(f"""
+        <div style="display:flex;justify-content:flex-start;margin:10px 0;">
+            <div style="
+                background:#f1f3f6;
+                padding:10px 14px;
+                border-radius:18px 18px 18px 4px;
+                max-width:70%;
+            ">
+                {msg["content"]}
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
-# 5. INPUT USER & RESPONS AI
-if prompt := st.chat_input("Tanya soal donor darah..."):
-    st.session_state.messages.append({"role": "user", "content": prompt})
+# ===============================
+# INPUT CHAT
+# ===============================
+prompt = st.chat_input("Tanya syarat, manfaat, jadwal donor darah...")
+
+if prompt:
+    st.session_state.messages.append(
+        {"role": "user", "content": prompt}
+    )
+    response = get_response(prompt)
+    st.session_state.messages.append(
+        {"role": "assistant", "content": response}
+    )
     st.rerun()
-
-# Cek jika pesan terakhir dari user, maka minta jawaban AI
-if st.session_state.messages[-1]["role"] == "user":
-    with st.spinner("Sedang memverifikasi informasi..."):
-        try:
-            chat_completion = client.chat.completions.create(
-                messages=st.session_state.messages,
-                model="llama-3.3-70b-versatile",
-                temperature=0.3, # Temperature rendah agar AI lebih patuh/tidak ngaco
-            )
-            response_text = chat_completion.choices[0].message.content
-            st.session_state.messages.append({"role": "assistant", "content": response_text})
-            st.rerun()
-        except Exception as e:
-            st.error(f"Gagal terhubung ke AI: {e}")
