@@ -19,9 +19,13 @@ st.set_page_config(
 # LOAD & TRAIN MODEL
 # ===============================
 @st.cache_resource
-def init_model():
-    nltk.download("punkt")
+def init_all():
+    # TAMBAHKAN DUA BARIS INI:
+    nltk.download('punkt')
+    nltk.download('punkt_tab') # Penting untuk versi NLTK terbaru di server
+    
     stemmer = LancasterStemmer()
+    # ... sisa kode kamu yang lain ...
 
     with open("intents.json", encoding="utf-8") as f:
         data = json.load(f)
