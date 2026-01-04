@@ -1,0 +1,14 @@
+{
+  "intents": [
+    {
+      "tag": "salam",
+      "patterns": ["Halo", "Selamat pagi", "Hai", "Permisi"],
+      "responses": ["Halo! Ada yang bisa kami bantu terkait info donor darah?", "Selamat datang di Chatbot Layanan Donor Darah."]
+    },
+    {
+      "tag": "syarat",
+      "patterns": ["Apa syarat donor darah?", "Berapa berat badan minimal?", "Umur berapa boleh donor?"],
+      "responses": ["Syarat umum: Usia 17-60 tahun, berat badan minimal 45kg, dan sehat jasmani."]
+    }
+  ]
+}
