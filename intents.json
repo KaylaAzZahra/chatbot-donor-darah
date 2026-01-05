@@ -17,6 +17,36 @@
       ]
     },
     {
+      "tag": "definisi_donor",
+      "patterns": [
+        "apa itu donor darah",
+        "jelaskan donor darah",
+        "apa sih donor darah",
+        "donor darah adalah",
+        "pengertian donor darah",
+        "maksud dari donor darah"
+      ],
+      "responses": [
+        "Donor darah adalah proses pengambilan darah dari seseorang secara sukarela untuk disimpan di bank darah dan digunakan kemudian untuk transfusi darah bagi yang membutuhkan.",
+        "Sederhananya, donor darah itu kegiatan menyumbangkan darah kita untuk menolong nyawa orang lain yang sedang kritis atau membutuhkan tambahan darah."
+      ]
+    },
+    {
+      "tag": "mau_donor",
+      "patterns": [
+        "saya mau donor",
+        "aku mau donor darah",
+        "ingin mendonorkan darah",
+        "cara daftar donor darah",
+        "bagaimana cara donor",
+        "prosedur donor darah"
+      ],
+      "responses": [
+        "Wah, niat yang mulia! Untuk mulai donor, kamu bisa langsung datang ke Unit Donor Darah (UDD) PMI terdekat atau daftar dulu lewat aplikasi 'Donorku'. Jangan lupa bawa identitas diri (KTP) ya!",
+        "Mantap! Langkah pertamanya: pastikan kamu sudah makan dan cukup tidur, lalu datang ke kantor PMI. Di sana kamu akan mengisi formulir pendaftaran dan menjalani pemeriksaan kesehatan singkat sebelum diambil darahnya."
+      ]
+    },
+    {
       "tag": "syarat",
       "patterns": [
         "syarat donor", "apa syarat donor", "syarat donor darah", "bolehkah saya donor", "kriteria donor darah",
@@ -29,10 +59,8 @@
         "persyaratan donor darah pmi", "standar donor darah", "cek kelayakan donor"
       ],
       "responses": [
-        "Syarat utama donor darah: usia 17–60 tahun, berat badan minimal 45 kg, tekanan darah normal, dan hemoglobin (HB) mencukupi.",
-        "Pendonor harus sehat, cukup tidur minimal 5 jam, tidak sedang sakit, dan tidak mengonsumsi obat tertentu sebelum donor.",
-        "Pastikan Hb kamu antara 12,5-17,0 g/dL dan tekanan darah sistol 110-160 mmHg serta diastol 70-100 mmHg.",
-        "Khusus wanita, tidak diperbolehkan donor saat menstruasi, hamil, atau menyusui demi kesehatan pendonor."
+        "Syarat utamanya adalah usia 17-60 tahun, berat badan minimal 45kg, tekanan darah normal, dan kadar hemoglobin (HB) yang cukup. Kamu juga harus dalam keadaan sehat ya!",
+        "Untuk donor, pastikan kamu sehat fisik, tidur cukup minimal 5 jam, tidak sedang minum obat, dan bagi wanita tidak sedang datang bulan atau menyusui."
       ]
     },
     {
@@ -46,10 +74,8 @@
         "fungsi donor darah bagi tubuh", "apa yang didapat setelah donor darah", "kelebihan rutin donor darah"
       ],
       "responses": [
-        "Donor darah membantu menyelamatkan nyawa orang lain dan meningkatkan kepedulian sosial.",
-        "Selain membantu sesama, donor darah rutin juga berfungsi sebagai check-up kesehatan gratis untukmu.",
-        "Manfaat lainnya: menurunkan risiko penyakit jantung, memperlancar sirkulasi darah, dan membantu regenerasi sel darah merah baru.",
-        "Secara psikologis, donor darah memberikan rasa bahagia karena telah membantu menyelamatkan hingga 3 nyawa sekaligus."
+        "Banyak banget! Selain nolong orang, donor darah rutin bisa bikin jantung lebih sehat, memperlancar aliran darah, dan bikin tubuh memproduksi sel darah baru yang lebih segar.",
+        "Donor darah itu ibarat 'service rutin' buat tubuh kamu. Kamu jadi bisa tahu kondisi kesehatanmu secara gratis lewat pemeriksaan awal sebelum donor."
       ]
     },
     {
@@ -62,9 +88,8 @@
         "pmi buka hari apa saja", "jadwal udd pmi", "hari kerja pmi", "donor darah hari libur"
       ],
       "responses": [
-        "Jadwal donor darah biasanya tersedia setiap hari kerja di kantor PMI. Untuk mobil donor, jadwalnya berbeda di tiap kota.",
-        "Kamu bisa cek jadwal donor darah terbaru melalui media sosial PMI daerah atau datang langsung ke Unit Donor Darah (UDD) terdekat.",
-        "Untuk jadwal hari ini, silakan gunakan aplikasi 'Donorku' atau hubungi call center PMI setempat untuk lokasi mobil unit terupdate."
+        "Jadwal donor biasanya ada setiap hari kerja di Unit Donor Darah (UDD) PMI setempat. Kamu bisa cek Instagram PMI kota kamu buat info terupdate!",
+        "Cek aplikasi 'Donorku' atau media sosial PMI terdekat ya untuk tahu jadwal mobil unit yang lagi keliling hari ini."
       ]
     },
     {
@@ -76,9 +101,8 @@
         "lokasi donor darah terdekat hari ini", "pmi cabang mana", "dimana saya bisa nyumbang darah", "posko donor darah"
       ],
       "responses": [
-        "Kamu bisa mendonorkan darah di Unit Donor Darah (UDD) PMI terdekat di kotamu.",
-        "Biasanya donor darah juga tersedia di mobil unit PMI di kampus, mall, atau acara bakti sosial.",
-        "Gunakan fitur Google Maps dengan kata kunci 'PMI Terdekat' atau cek website resmi PMI untuk daftar alamat lengkap di daerahmu."
+        "Kamu bisa langsung datang ke Gedung PMI atau Unit Donor Darah (UDD) terdekat. Kadang ada juga gerai donor di mall-mall tertentu lho!",
+        "Gunakan Google Maps dengan kata kunci 'PMI Terdekat' untuk tahu lokasi persisnya dari tempatmu sekarang."
       ]
     },
     {
@@ -90,9 +114,8 @@
         "berapa kali maksimal donor setahun", "jeda donor darah pmi", "kapan waktu yang tepat donor kembali"
       ],
       "responses": [
-        "Jeda minimal donor darah adalah 60 hari atau sekitar 2 bulan.",
-        "Idealnya seseorang bisa donor darah 4–5 kali dalam setahun untuk menjaga kesehatan tubuh tetap optimal.",
-        "Pastikan sudah lewat 8 minggu sejak donor terakhirmu sebelum mendaftar kembali di aplikasi Donorku atau ke PMI."
+        "Minimal jeda waktunya adalah 60 hari atau sekitar 2 bulan sekali ya. Biar tubuh kamu punya waktu buat regenerasi darah.",
+        "Idealnya kamu bisa donor 4-5 kali dalam setahun. Jangan dipaksa tiap bulan ya, kasihan tubuhnya!"
       ]
     },
     {
@@ -105,10 +128,8 @@
         "tidak boleh apa setelah donor darah", "larangan pasca donor"
       ],
       "responses": [
-        "Donor darah aman. Efek samping ringan seperti pusing bisa dicegah dengan cukup minum dan istirahat.",
-        "Setelah donor, disarankan banyak minum air, makan bergizi, dan hindari aktivitas berat selama 24 jam ke depan.",
-        "Rasa sakit hanya sedikit seperti gigitan semut saat jarum dimasukkan. Memar ringan adalah hal wajar dan akan hilang sendiri.",
-        "Jika merasa pusing, segera berbaring dengan posisi kaki lebih tinggi dari kepala dan konsumsi minuman manis."
+        "Gak sakit kok, cuma kerasa kayak digigit semut sebentar pas jarum masuk. Habis donor mungkin kerasa agak pusing sedikit, makanya harus istirahat dulu.",
+        "Efeknya cuma lemas sebentar. Makanya habis donor kamu bakal dikasih makanan tambahan dan susu. Jangan langsung olahraga berat ya!"
       ]
     },
     {
@@ -119,10 +140,9 @@
         "membantu sekali", "syukron", "maturnuwun", "makasih ya asisten", "good job", "makasih info donornya"
       ],
       "responses": [
-        "Sama-sama! Terima kasih sudah peduli terhadap donor darah 🩸",
-        "Sama-sama. Jangan lupa donor darah secara rutin ya!",
-        "Senang bisa membantu. Tetap sehat dan semangat berbagi!",
-        "Sama-sama! Sampai jumpa di donor darah berikutnya 😊"
+        "Sama-sama! Senang bisa bantu pahlawan donor kayak kamu 🩸",
+        "Sip! Kalau ada yang mau ditanya lagi, panggil aku aja ya.",
+        "Sama-sama. Jangan lupa makan enak dan istirahat habis donor nanti!"
       ]
     },
     {
@@ -134,9 +154,9 @@
         "lagi ngapain", "lagu enak", "gosip artis", "bola", "shopee", "tokopedia", "beli baju", "resep ayam"
       ],
       "responses": [
-        "Maaf, saya adalah asisten khusus informasi donor darah 😊",
-        "Saya hanya bisa membantu pertanyaan seputar donor darah.",
-        "Fokus saya hanya pada informasi seputar donor darah dan PMI. Silakan tanya tentang donor darah!"
+        "Wah, kalau itu aku kurang tahu. Aku cuma spesialis info donor darah nih 😊",
+        "Maaf ya, mending tanya seputar donor darah aja, aku pasti jawab!",
+        "Fokus ke donor darah yuk! Aku didesain khusus buat bantu pendonor soalnya."
       ]
     }
   ]
