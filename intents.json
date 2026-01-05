@@ -3,162 +3,140 @@
     {
       "tag": "salam",
       "patterns": [
-        "halo", "hai", "hi", "hey", "p",
-        "selamat pagi", "selamat siang", "selamat sore",
-        "halo bot", "hai bot", "siapa ini"
+        "halo", "hai", "hi", "hey", "p", "halo bot", "hai bot", "siapa ini", "test", "tes", "oy", "bro", "sis",
+        "selamat pagi", "selamat siang", "selamat sore", "selamat malam", "pagi", "siang", "sore", "malam",
+        "assalamualaikum", "hallo", "hay", "helo", "apa kabar", "ada orang?", "permisi", "punten", "halo sahabat donor",
+        "hai asisten", "halo asisten", "apa kamu disana?", "bot?", "hallo bot", "halo siapa ini"
       ],
       "responses": [
         "Halo! Saya Sahabat Donor. Ada yang bisa saya bantu?",
         "Hai! Butuh informasi seputar donor darah hari ini?",
-        "Halo! Silakan tanyakan apa saja tentang donor darah 🩸"
+        "Halo! Silakan tanyakan apa saja tentang donor darah 🩸",
+        "Waalaikumsalam! Ada yang bisa Sahabat Donor bantu?",
+        "Halo! Senang sekali kamu mampir. Mau tanya soal donor darah?"
       ]
     },
-
     {
       "tag": "syarat",
       "patterns": [
-        "syarat donor",
-        "apa syarat donor",
-        "syarat donor darah",
-        "bolehkah saya donor",
-        "kriteria donor darah",
-        "umur berapa boleh donor",
-        "berat badan minimal donor",
-        "syarat menjadi pendonor"
+        "syarat donor", "apa syarat donor", "syarat donor darah", "bolehkah saya donor", "kriteria donor darah",
+        "umur berapa boleh donor", "berat badan minimal donor", "syarat menjadi pendonor", "aturan donor darah",
+        "siapa saja yang boleh donor", "syarat kesehatan donor", "apakah saya bisa donor", "ketentuan donor darah",
+        "berat badan kurang boleh donor?", "usia minimal donor", "usia maksimal donor darah", "syarat bb donor",
+        "boleh donor kalau habis minum obat?", "syarat tensi donor", "tensi normal donor darah", "syarat hb donor",
+        "hb minimal donor", "apakah wanita haid boleh donor?", "donor darah saat menstruasi", "syarat tidur sebelum donor",
+        "istirahat cukup sebelum donor", "boleh donor kalau kurang tidur?", "syarat makan sebelum donor",
+        "persyaratan donor darah pmi", "standar donor darah", "cek kelayakan donor"
       ],
       "responses": [
         "Syarat utama donor darah: usia 17–60 tahun, berat badan minimal 45 kg, tekanan darah normal, dan hemoglobin (HB) mencukupi.",
-        "Pendonor harus sehat, cukup tidur minimal 5 jam, tidak sedang sakit, dan tidak mengonsumsi obat tertentu sebelum donor."
+        "Pendonor harus sehat, cukup tidur minimal 5 jam, tidak sedang sakit, dan tidak mengonsumsi obat tertentu sebelum donor.",
+        "Pastikan Hb kamu antara 12,5-17,0 g/dL dan tekanan darah sistol 110-160 mmHg serta diastol 70-100 mmHg.",
+        "Khusus wanita, tidak diperbolehkan donor saat menstruasi, hamil, atau menyusui demi kesehatan pendonor."
       ]
     },
-
     {
       "tag": "manfaat",
       "patterns": [
-        "manfaat donor",
-        "manfaat donor darah",
-        "apa manfaat donor",
-        "keuntungan donor darah",
-        "kenapa harus donor",
-        "mengapa donor penting",
-        "tujuan donor darah"
+        "manfaat donor", "manfaat donor darah", "apa manfaat donor", "keuntungan donor darah", "kenapa harus donor",
+        "mengapa donor penting", "tujuan donor darah", "dampak positif donor darah", "manfaat bagi kesehatan",
+        "kenapa kita harus membantu", "alasan donor darah", "efek baik donor darah", "kebaikan donor darah",
+        "donor darah bikin gemuk?", "donor darah bikin kurus?", "apa untungnya saya donor", "manfaat untuk jantung",
+        "donor darah buat kesehatan kulit", "kenapa pmi butuh darah", "pentingnya setetes darah", "donor darah sedekah",
+        "fungsi donor darah bagi tubuh", "apa yang didapat setelah donor darah", "kelebihan rutin donor darah"
       ],
       "responses": [
         "Donor darah membantu menyelamatkan nyawa orang lain dan meningkatkan kepedulian sosial.",
-        "Selain membantu sesama, donor darah rutin juga berfungsi sebagai check-up kesehatan gratis untukmu."
+        "Selain membantu sesama, donor darah rutin juga berfungsi sebagai check-up kesehatan gratis untukmu.",
+        "Manfaat lainnya: menurunkan risiko penyakit jantung, memperlancar sirkulasi darah, dan membantu regenerasi sel darah merah baru.",
+        "Secara psikologis, donor darah memberikan rasa bahagia karena telah membantu menyelamatkan hingga 3 nyawa sekaligus."
       ]
     },
-
     {
       "tag": "jadwal",
       "patterns": [
-        "jadwal donor",
-        "jadwal donor darah",
-        "jadwal pmi",
-        "kapan bisa donor",
-        "hari apa bisa donor darah",
-        "jam donor darah",
-        "jadwal mobil donor",
-        "donor darah hari ini"
+        "jadwal donor", "jadwal donor darah", "jadwal pmi", "kapan bisa donor", "hari apa bisa donor darah",
+        "jam donor darah", "jadwal mobil donor", "donor darah hari ini", "pmi buka jam berapa", "jadwal pmi sabtu minggu",
+        "kapan ada mobil unit", "info jadwal donor daerah saya", "donor darah besok", "jadwal rutin pmi",
+        "jam operasional pmi", "waktu pelaksanaan donor darah", "kapan donor darah diadakan", "jadwal baksos donor darah",
+        "pmi buka hari apa saja", "jadwal udd pmi", "hari kerja pmi", "donor darah hari libur"
       ],
       "responses": [
         "Jadwal donor darah biasanya tersedia setiap hari kerja di kantor PMI. Untuk mobil donor, jadwalnya berbeda di tiap kota.",
-        "Kamu bisa cek jadwal donor darah terbaru melalui media sosial PMI daerah atau datang langsung ke Unit Donor Darah (UDD) terdekat."
+        "Kamu bisa cek jadwal donor darah terbaru melalui media sosial PMI daerah atau datang langsung ke Unit Donor Darah (UDD) terdekat.",
+        "Untuk jadwal hari ini, silakan gunakan aplikasi 'Donorku' atau hubungi call center PMI setempat untuk lokasi mobil unit terupdate."
       ]
     },
-
     {
       "tag": "lokasi",
       "patterns": [
-        "dimana donor darah",
-        "tempat donor darah",
-        "lokasi donor",
-        "pmi dimana",
-        "pmi terdekat",
-        "kantor pmi"
+        "dimana donor darah", "tempat donor darah", "lokasi donor", "pmi dimana", "pmi terdekat", "kantor pmi",
+        "alamat pmi", "pos donor darah", "nyari pmi", "pmi di mall", "lokasi mobil unit pmi", "tempat donor darah di kota",
+        "dimana gedung pmi", "udd pmi dimana", "cari lokasi donor darah", "titik donor darah", "gerai donor darah",
+        "lokasi donor darah terdekat hari ini", "pmi cabang mana", "dimana saya bisa nyumbang darah", "posko donor darah"
       ],
       "responses": [
         "Kamu bisa mendonorkan darah di Unit Donor Darah (UDD) PMI terdekat di kotamu.",
-        "Biasanya donor darah juga tersedia di mobil unit PMI di kampus, mall, atau acara bakti sosial."
+        "Biasanya donor darah juga tersedia di mobil unit PMI di kampus, mall, atau acara bakti sosial.",
+        "Gunakan fitur Google Maps dengan kata kunci 'PMI Terdekat' atau cek website resmi PMI untuk daftar alamat lengkap di daerahmu."
       ]
     },
-
-    {
-      "tag": "golongan_darah",
-      "patterns": [
-        "golongan darah",
-        "golongan darah o",
-        "golongan darah ab",
-        "donor universal",
-        "penerima universal",
-        "darah rhesus"
-      ],
-      "responses": [
-        "Golongan darah O adalah donor universal, sedangkan AB adalah penerima universal.",
-        "Golongan darah terdiri dari A, B, AB, dan O dengan rhesus positif atau negatif."
-      ]
-    },
-
-    {
-      "tag": "efek_samping",
-      "patterns": [
-        "apakah donor darah sakit",
-        "efek samping donor",
-        "bahaya donor darah",
-        "pusing setelah donor",
-        "setelah donor harus apa"
-      ],
-      "responses": [
-        "Donor darah aman. Efek samping ringan seperti pusing bisa dicegah dengan cukup minum dan istirahat.",
-        "Setelah donor, disarankan banyak minum air, makan bergizi, dan hindari aktivitas berat."
-      ]
-    },
-
     {
       "tag": "jeda_waktu",
       "patterns": [
-        "kapan boleh donor lagi",
-        "berapa bulan sekali donor",
-        "jarak donor darah",
-        "bolehkah donor tiap bulan",
-        "donor darah berapa kali setahun"
+        "kapan boleh donor lagi", "berapa bulan sekali donor", "jarak donor darah", "bolehkah donor tiap bulan",
+        "donor darah berapa kali setahun", "jarak waktu antar donor", "waktu istirahat donor", "habis donor nunggu berapa lama",
+        "berapa hari jeda donor", "ketentuan waktu donor kembali", "donor darah rutin tiap berapa lama",
+        "berapa kali maksimal donor setahun", "jeda donor darah pmi", "kapan waktu yang tepat donor kembali"
       ],
       "responses": [
         "Jeda minimal donor darah adalah 60 hari atau sekitar 2 bulan.",
-        "Idealnya seseorang bisa donor darah 4–5 kali dalam setahun."
+        "Idealnya seseorang bisa donor darah 4–5 kali dalam setahun untuk menjaga kesehatan tubuh tetap optimal.",
+        "Pastikan sudah lewat 8 minggu sejak donor terakhirmu sebelum mendaftar kembali di aplikasi Donorku atau ke PMI."
       ]
     },
-
+    {
+      "tag": "efek_samping",
+      "patterns": [
+        "apakah donor darah sakit", "efek samping donor", "bahaya donor darah", "pusing setelah donor",
+        "setelah donor harus apa", "donor darah sakit ga", "jarumnya besar ga", "efek donor darah bagi pemula",
+        "mual habis donor", "ngantuk setelah donor", "lemes setelah donor", "bekas suntikan memar",
+        "donor darah bahaya buat jantung?", "apa yang dirasakan setelah donor", "pantangan setelah donor darah",
+        "tidak boleh apa setelah donor darah", "larangan pasca donor"
+      ],
+      "responses": [
+        "Donor darah aman. Efek samping ringan seperti pusing bisa dicegah dengan cukup minum dan istirahat.",
+        "Setelah donor, disarankan banyak minum air, makan bergizi, dan hindari aktivitas berat selama 24 jam ke depan.",
+        "Rasa sakit hanya sedikit seperti gigitan semut saat jarum dimasukkan. Memar ringan adalah hal wajar dan akan hilang sendiri.",
+        "Jika merasa pusing, segera berbaring dengan posisi kaki lebih tinggi dari kepala dan konsumsi minuman manis."
+      ]
+    },
     {
       "tag": "terima_kasih",
       "patterns": [
-        "terima kasih",
-        "makasih",
-        "thanks",
-        "oke bot",
-        "siap",
-        "ok makasih"
+        "terima kasih", "makasih", "thanks", "oke bot", "siap", "ok makasih", "tengkyu", "hatur nuhun",
+        "makasih informasinya", "makasih bantuannya", "oke sip", "sip", "ok", "terima kasih banyak", "keren bot",
+        "membantu sekali", "syukron", "maturnuwun", "makasih ya asisten", "good job", "makasih info donornya"
       ],
       "responses": [
         "Sama-sama! Terima kasih sudah peduli terhadap donor darah 🩸",
-        "Sama-sama. Jangan lupa donor darah secara rutin ya!"
+        "Sama-sama. Jangan lupa donor darah secara rutin ya!",
+        "Senang bisa membantu. Tetap sehat dan semangat berbagi!",
+        "Sama-sama! Sampai jumpa di donor darah berikutnya 😊"
       ]
     },
-
     {
       "tag": "o_topik",
       "patterns": [
-        "cuaca hari ini",
-        "jam berapa",
-        "siapa presiden",
-        "berita hari ini",
-        "resep masakan",
-        "hp terbaru",
-        "game"
+        "cuaca hari ini", "jam berapa", "siapa presiden", "berita hari ini", "resep masakan", "hp terbaru", "game",
+        "prediksi bola", "harga emas", "belajar coding", "lagu terbaru", "film bioskop", "politik", "agama",
+        "berapa 1 tambah 1", "siapa penciptamu", "curhat dong", "kamu suka apa", "makan apa hari ini",
+        "lagi ngapain", "lagu enak", "gosip artis", "bola", "shopee", "tokopedia", "beli baju", "resep ayam"
       ],
       "responses": [
         "Maaf, saya adalah asisten khusus informasi donor darah 😊",
-        "Saya hanya bisa membantu pertanyaan seputar donor darah."
+        "Saya hanya bisa membantu pertanyaan seputar donor darah.",
+        "Fokus saya hanya pada informasi seputar donor darah dan PMI. Silakan tanya tentang donor darah!"
       ]
     }
   ]
